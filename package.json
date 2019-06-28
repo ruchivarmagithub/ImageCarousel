@@ -1,0 +1,19 @@
+{
+  "name": "mlbcarousel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts/mlbBrowsePage.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "node": "^12.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

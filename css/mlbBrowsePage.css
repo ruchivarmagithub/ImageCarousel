@@ -1,0 +1,176 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #FFFFFF;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background-image: url("../images/background.jpg");
+    object-fit: cover;
+}
+
+ /* thumbnail container and thumbnail styling */
+ .container {
+    width: 100%;
+    overflow: scroll;
+    overflow-y: hidden;
+    padding: 30px;
+    margin: 10px;
+    position: relative;
+}
+
+.inner__container {
+    /* Set margin top and bottom for inner__container : (Height)/2 
+    where Height is width/(Aspect Ratio)
+    And so for 4:3 aspect ratio with item width as 250px
+    margin top and bottom is (250/(4/3))/2 which is 93.98 */
+    margin: 93.98px 5px; 
+    white-space: nowrap;
+    padding: 10px;
+}
+
+/* individual game item styling*/
+.item {
+    margin: 5px;
+    /* height = width/(Aspect Ratio). 250/(4/3) based on 4:3 aspect ratio */
+    width: 250px;
+    height: 187.96px; 
+    display: inline-block;
+    transition: all 350ms;
+    transform-origin: center left;
+}
+
+.item img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+}
+
+/* to remove focus outline set due tabIndex */
+:focus { 
+    outline: none; 
+  }
+
+  /* to remove scrollbars */
+::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* styling for headline and description that appear above and below focused item */
+.headline, .description {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 350ms;
+    left: 25px;
+}
+
+.headline {
+    top: -20px;
+}
+
+.description {
+    bottom: -20px;
+}
+
+/* details overlay styling */
+.overlayDetails {
+    position: absolute;
+    top: 80px;
+    left: 70px;
+    width: 70%;
+    height: 70%;  
+    background-color: #C0AC5D;
+    word-wrap: normal; 
+    white-space: normal;
+    border-radius: 5px;
+    border: 2px solid #FFFFFF;
+    color: #FFFFFF;
+    padding: 5px;
+}
+
+p {
+    word-wrap: break-word; 
+}
+/*  styling for keyboard navigation 
+When users focuses on an item in the list, the following happens
+a. all the items except the selected one are a bit faded out
+b. the current item gets scaled by 150%
+c. shift the items to the left of this current item to the left
+d. shift the items to the right of this current item to the right
+e. show the headline and description below thumbnail/item
+
+*/
+
+/* a. all the items except the selected one are a bit faded out */ 
+.inner__container.selected .item {
+    opacity: 0.5;
+}
+
+/* b. the selected item gets scaled by 150% */
+.inner__container.selected .item.selected {
+    transform: scale(1.5);
+    opacity: 1; /* make the selected item opaque again to satisy a. above */
+    border: 2px solid #FFFFFF
+}
+
+/* c. shift all items to the left */
+.inner__container.selected  { 
+    /* shift item left by (width * (scaleFactor -1)/2 
+    250 * (1.5 - 1) /2 = 62.5px
+    We are shifting to left a bit less than 62.5px since the first thumbnail
+    was getting cut off */
+    transform: translate3d(-50px, 0, 0);
+}
+
+/* d. shift the items to the right of the selected item to the right */
+.item.selected ~ .item { 
+    /* shift item right by (width * (scaleFactor - 1)) 
+     250 * (1.5 - 1) = 125px
+    */
+    transform: translate3d(125px, 0, 0);
+}
+
+/* e. show the headline and description below selected thumbnail/item */
+.item.selected .description, .item.selected .headline {
+    opacity: 1;
+}
+
+/* styling when users selects an item/thumbnail 
+When users hits ok or enter or keyboard:
+a. show details overlay
+b. fade out the selected item 
+c. scale selected item back to normal position 
+*/
+
+.display {
+    display: inline-block;
+}
+
+.displayNone {
+    display: none;
+}
+
+/* styling for error message */
+
+p > span {
+    position: absolute;
+    top: 0px;
+    color: #B2110B;
+    font-weight: bold;
+    font-size: 20px;
+}
