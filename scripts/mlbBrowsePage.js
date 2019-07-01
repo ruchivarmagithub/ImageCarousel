@@ -27,8 +27,8 @@ function fetchMLBData() {
     
     PLEASE uncomment line 30 and comment out line 31 if you want to fetch today's data */
 
-    // var mlbURL = `http://statsapi.mlb.com/api/v1/schedule?hydrate=game(content(editorial(recap))),decisions&date=${date}&sportId=1`;
-    var mlbURL = "http://statsapi.mlb.com/api/v1/schedule?hydrate=game(content(editorial(recap))),decisions&date=2018-06-10&sportId=1";
+    var mlbURL = `http://statsapi.mlb.com/api/v1/schedule?hydrate=game(content(editorial(recap))),decisions&date=${date}&sportId=1`;
+    // var mlbURL = "http://statsapi.mlb.com/api/v1/schedule?hydrate=game(content(editorial(recap))),decisions&date=2018-06-10&sportId=1";
 
     var xhr = new XMLHttpRequest();
     xhr.timeout = 2000;
